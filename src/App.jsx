@@ -20,7 +20,7 @@ const ProfileTemplate = ({users, userid, onLogin}) => {
   return (
       <div className="profile-template">
 
-        <img onClick={LOGIN} src="/assets/profiles/icon-cat.jpg" alt="user profile icon" className="profile-icon" />
+        <img onClick={LOGIN} src={USERINFO.profile.icon} alt="user profile icon" className="profile-icon" />
 
         <h2 className="username">
           {USERCONTENT.profile.username}
@@ -42,6 +42,7 @@ export default function App() {
       id: 0,
 
       profile: {
+        icon: "/assets/profiles/icon-cat.jpg",
         username: "ADMIN"
       },
 
@@ -67,13 +68,7 @@ export default function App() {
     setUserDt(newData);
   }
 
-  const handle_updatetasks = (tasksArray) => {
-    setUserDt((prev) => ({
-      ...prev,
-      tasks: tasksArray
-    }))
-  }
-
+  // ================== TASK RELATED FUNCTIONS ================== \\
   const handle_addnewtask = (data) => {
     setUserDt((prev)=> ({
       ...prev,
@@ -84,6 +79,42 @@ export default function App() {
     }))
   }
 
+  const handle_updatetasks = (tasksArray) => {
+    setUserDt((prev) => ({
+      ...prev,
+      tasks: tasksArray
+    }))
+  }
+
+  const handle_updatesingletask = (taskID, newtaskdata) => {
+    setUserDt((prev) => ({
+        ...prev,
+        tasks: prev.tasks.map((task) => {
+          if (task.id !== taskID) return task;
+
+          return {
+            ...task,
+            title: newtaskdata.title !== "" ? newtaskdata.title : task.title,
+            desc: newtaskdata.desc !== "" ? newtaskdata.desc : task.desc,
+          };
+        }),
+    }));
+};
+
+
+  const handle_deletetask = (taskID) => {
+
+    const updatedTaskArray = userData?.tasks.filter(
+      (item) => item.id!==taskID
+    )
+
+    setUserDt((prev)=>({
+        ...prev,
+        tasks: updatedTaskArray
+    }))
+  }
+
+  // ================== USER RELATED FUNCTIONS ================== \\
   const handle_signoff = () => {
 
     setUsers((prev)=>{
@@ -108,8 +139,13 @@ export default function App() {
         Object.keys(userData).length > 0 ? (
           <TaskManager
               data={userData}
+
               onTaskCreate={handle_addnewtask}
               onTaskUpdate={handle_updatetasks}      
+              onTaskDelete={handle_deletetask}
+
+              onSingleTaskUpdate={handle_updatesingletask}
+
               onLogout={handle_signoff}
             />
         ) :
@@ -119,6 +155,14 @@ export default function App() {
             <h1 className="profile-title">
               Welcome to Profisk
             </h1>
+
+            <p className="profile-subtitle">
+              Your local open-source task manager with profiles.
+            </p>
+
+            <h3 className="profiles-title">
+              Select your profile
+            </h3>
 
             <div className="task-profiles">
 

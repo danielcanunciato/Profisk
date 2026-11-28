@@ -1,0 +1,350 @@
+
+.main-info {
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 40px auto;
+
+    border: 4px solid white;
+    border-radius: 0 25px;
+
+    background: rgba(185, 21, 255, 0.1);
+}
+
+.profile-icon-tasks {
+    width: 100px;
+    height: auto;
+
+    margin-right: 40px;
+
+    transform: rotate(-15deg);
+
+    border: 4px solid white;
+}
+
+.info-items {
+    width: 50%;
+
+    p:nth-child(1) {
+        text-align: left;
+        color: white;
+        font-size: 2rem;
+    }
+
+    p:nth-child(2) {
+        text-align: left;
+
+    }
+}
+
+.sign-off {
+    border-radius: 40px;
+    padding: 8px;
+
+    background: rgb(121, 20, 20);
+    border: 4px solid white;
+    color: white;
+
+    text-transform: uppercase;
+    font-weight: bold;
+
+    transition: .5s ease;
+}
+
+.sign-off:hover {
+    transform: scale(1.08);
+    cursor: pointer;
+    filter: drop-shadow(0 0 4px rgb(255, 0, 0));
+}
+
+.create-task-title {
+    margin-top: 80px;
+    margin-bottom: 6px;
+    font-size: 3rem;
+}
+
+.task-creator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(46, 26, 58);
+    padding: 24px;
+    border-radius: 0 0 120px 120px;
+    border: 4px solid white;
+
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.task-create {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 80%;
+    max-width: 600px;
+
+    .input-group {
+        position: relative;
+        width: 100%;
+    }
+
+    label {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: "Arial Bold", sans-serif;
+        font-size: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        pointer-events: none;
+        transition: 0.25s ease all;
+    }
+
+    textarea {
+        font-size: 1rem;
+        font-family: "Arial Bold", sans-serif;
+        color: white;
+
+        padding: 16px;
+        box-sizing: border-box;
+        resize: none;
+
+        margin: 10px 0;
+
+        height: 90px;
+        width: 100%;
+
+        border: 4px solid white;
+        background: rgba(185, 21, 255, 0.1);
+        border-radius: 0 40px;
+        outline: none;
+    }
+
+    .task-desc {
+        font-style: italic;
+    }
+
+    .input-group:has(textarea:focus) label,
+    .input-group:has(textarea:not(:placeholder-shown)) label {
+        top: -14px;
+        left: -22px;
+        font-size: .75rem;
+        transform: rotate(-10deg);
+        color: white;
+    }
+
+    .submit {
+        border: 2px solid white;
+        background: black;
+
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1.5rem;
+
+        width: 60%;
+        height: 60px;
+
+        margin: 0 auto;
+
+        transition: 1s ease-out;
+    }
+
+    .submit:hover {
+        background: white;
+        border: 4px solid black;
+        color: black;
+
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+/* TASKS */
+.task-template {
+    width: 100%;
+    margin: 20px auto;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    background: rgba(185, 21, 255, 0.1);
+    border: 4px solid white;
+    border-radius: 0 30px;
+    backdrop-filter: blur(8px);
+
+    color: white;
+    font-family: "Arial Bold", sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 0 15px rgba(185, 21, 255, 0.35);
+    }
+
+    .flex-part {
+        display: flex;
+    }
+
+    .task-information {
+        width: 100%;
+    }
+
+    /* Side-by-side layout: Info on left, Buttons on right */
+    .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    .task-info {
+        flex: 1;
+        padding: 20px 24px; /* Padding lives here so buttons can hit the card edges */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .task-title {
+            font-size: 1.6rem;
+            margin: 0 0 6px 0;
+            word-break: break-word;
+        }
+
+        .task-description {
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+    }
+
+    /* Full-height side-by-side buttons */
+    .actions {
+        display: flex;
+        align-items: stretch;
+        flex-shrink: 0;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 20px;
+            border: none;
+            border-left: 3px solid white; /* Clean vertical dividers between buttons */
+            border-radius: 0; /* Flush with the card edges */
+
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.25s ease;
+
+            &:hover:not(:disabled) {
+                filter: brightness(1.25);
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+        }
+
+        .conclude-task {
+            background: rgb(25, 135, 84);
+        }
+
+        .edit-task {
+            background: rgba(185, 21, 255, 0.4);
+        }
+
+        .delete-task {
+            background: rgb(121, 20, 20);
+        }
+    }
+
+    /* Edit Drawer below the row */
+    .edit-data-holder {
+        padding: 20px 24px 24px 24px;
+        border-top: 3px solid white;
+    }
+
+    .edit-data {
+        display: flex;
+        flex-direction: column;
+        gap: 26px; /* Extra gap to give the floating label room above each input */
+        margin-top: 12px;
+
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+
+        label {
+            position: absolute;
+            left: 18px;
+            top: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: "Arial Bold", sans-serif;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: 0.25s ease all;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            box-sizing: border-box;
+
+            font-size: 1rem;
+            font-family: "Arial Bold", sans-serif;
+            color: white;
+
+            background: rgba(0, 0, 0, 0.25);
+            border: 3px solid white;
+            border-radius: 0 20px;
+            outline: none;
+            transition: 0.25s ease;
+
+            &:focus {
+                background: rgba(185, 21, 255, 0.2);
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        /* Floats label up when input is focused OR already has text */
+        .input-group:has(input:focus) label,
+        .input-group:has(input:not(:placeholder-shown)) label {
+            top: -20px;
+            left: 4px;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        .submit {
+            align-self: flex-start;
+            padding: 10px 24px;
+
+            border-radius: 40px;
+            border: 3px solid white;
+            background: rgb(115, 20, 160);
+            color: white;
+
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+
+            &:hover {
+                transform: scale(1.06);
+                filter: drop-shadow(0 0 6px rgb(200, 80, 255));
+            }
+        }
+    }
+
+}

@@ -1,0 +1,67 @@
+body {
+    box-sizing: border-box;
+    user-select: none;
+    margin: 0;
+}
+
+.task-profiles {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.profile-template {
+    width: 260px;
+    padding: 16px;
+    background: rgb(50, 28, 64);
+    border: 8px solid rgb(69, 14, 152);
+    border-radius: 40px 0;
+    filter: drop-shadow(0 8px 2px black);
+    perspective: 220px;
+    max-height: 280px;
+    overflow: hidden;
+    transition: 1s ease;
+}
+
+.profile-icon {
+    border-radius: 20px;
+    border: 6px solid white;
+    filter: drop-shadow(0 8px 0 black);
+    margin-bottom: 20px;
+    transition: 1s ease;
+}
+
+.profile-icon:hover {
+    transform: translateY(-8px) rotate(2deg) scale(1.05) rotateX(4deg) rotateY(0deg);
+    transform-style: preserve-3d;
+    border-color: rgb(255, 0, 212);
+    cursor: pointer;
+}
+
+.profile-template:has(.profile-icon:hover) {
+    width: 280px;
+    max-height: 480px;
+
+    filter: drop-shadow(0 0 8px rgb(230, 1, 255));
+    transform: scale(1.02) rotate(-2deg);
+}
+
+.username {
+    font-size: 2.5rem;
+    text-align: left;
+
+    font-weight: bold;
+    filter: drop-shadow(-4px 4px 0 black);
+}
+
+.tasks-count {
+    font-size: 1.5rem;
+    text-align: right;
+
+    font-weight: bold;
+
+    filter: drop-shadow(3px 3px 0 black);
+}
